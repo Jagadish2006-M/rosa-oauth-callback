@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ROSA Spotify Callback</title>
+<style>
+body{background:#080808;color:#eee;font:16px Arial;max-width:650px;margin:35px auto;padding:0 18px}
+h1{color:#e6a45d;letter-spacing:5px}code{display:block;overflow-wrap:anywhere;background:#191919;padding:14px;border:1px solid #555;border-radius:8px}
+button{padding:12px 18px;background:#e6a45d;border:0;border-radius:7px;font-weight:bold;margin:12px 0}
+.note{color:#aaa;line-height:1.5}
+</style></head><body>
+<h1>ROSA</h1><h2>Spotify authorization received</h2>
+<p>Copy the authorization code below. Return to the ROSA setup page at <b>http://192.168.4.1</b>, paste the code and the state value, then select Finish Spotify connection.</p>
+<h3>Authorization code</h3><code id="code">Reading...</code><button onclick="copy('code')">Copy code</button>
+<h3>State</h3><code id="state">Reading...</code><button onclick="copy('state')">Copy state</button>
+<p class="note">This page is a static callback page. It does not store your Spotify credentials or tokens.</p>
+<script>
+const q=new URLSearchParams(location.search);
+document.getElementById('code').textContent=q.get('code')||('OAuth error: '+(q.get('error')||'missing code'));
+document.getElementById('state').textContent=q.get('state')||'missing state';
+function copy(id){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>alert('Copied'))}
+</script></body></html>
